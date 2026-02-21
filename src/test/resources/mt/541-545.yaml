@@ -1,0 +1,125 @@
+name: "MT541 to MT545 transformation"
+description: "Convert MT541 receive instruction to MT545 settlement instruction"
+version: "1.0"
+sourceFormat: "MT541"
+targetFormat: "MT545"
+
+generators:
+  - id: "sessionNumber"
+    type: "numeric"
+    length: 4
+  - id: "sequenceNumber"
+    type: "numeric"
+    length: 6
+  - id: "messageTime"
+    type: "time"
+    format: "HHmm"
+  - id: "messageDate"
+    type: "date"
+    format: "yyMMdd"
+  - id: "senderMessageReference"
+    type: "alphanumeric"
+    length: 14
+
+variables:
+  - id: "relatedMessageReference"
+    source:
+      block: 4
+      sequence: "GENL"
+      field: "20C::SEME"
+    required: true
+
+transformations:
+  # Block 1: Basic Header
+  - block: "1"
+    action: "set"
+    fields:
+      - field: "sessionNumber"
+        value: "${sessionNumber}"
+      - field: "sequenceNumber"
+        value: "${sequenceNumber}"
+
+  # Block 2: Application Header
+  - block: "2"
+    action: "set"
+    fields:
+      - field: "messageType"
+        value: "545"
+      - field: "senderInputTime"
+        value: "${messageTime}"
+      - field: "senderInputDate"
+        value: "${messageDate}"
+      - field: "receiverOutputTime"
+        value: "${messageTime}"
+      - field: "receiverOutputDate"
+        value: "${messageDate}"
+      - field: "sessionNumber"
+        value: "${sessionNumber}"
+      - field: "sequenceNumber"
+        value: "${sequenceNumber}"
+
+  # Block 3: User Header
+  - block: "3"
+    action: "set"
+    fields:
+      - field: "108"
+        value: "RNN24022237550"
+
+  # Block 4: Message Text
+  - block: "4"
+    sequence: "GENL"
+    action: "set"
+    fields:
+      - field: "20C::SEME"
+        value: "${senderMessageReference}"
+
+  - block: "4"
+    sequence: "GENL"
+    action: "delete"
+    fields:
+      - field: "98C::PREP"
+
+  - block: "4"
+    sequence: "GENL"
+    action: "insertAfter"
+    field: "23G"
+    sequences:
+      - sequence: "LINK"
+        fields:
+          - field: "20C::RELA"
+            value: "${relatedMessageReference}"
+
+  - block: "4"
+    sequence: "TRADDET"
+    action: "delete"
+    fields:
+      - field: "90A::DEAL"
+
+  - block: "4"
+    sequence: "TRADDET"
+    action: "deleteSequence"
+    sequences:
+      - sequence: "FIA"
+
+  # Block 5: Trailer
+  - block: "5"
+    action: "set"
+    fields:
+      - field: "CHK"
+        value: "543FB710868B"
+
+  # System Block
+  - block: "S"
+    action: "set"
+    fields:
+      - field: "SAC"
+        value: ""
+      - field: "COP"
+        value: "P"
+      - field: "INS"
+        value: "saaapra1/MQSAA2MURFIN"
+      - field: "UNT"
+        value: "NL2ARE"
+      - field: "USR"
+        value: "all_adm"
+
