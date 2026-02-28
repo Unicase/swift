@@ -1,0 +1,20 @@
+name: "pacs.008 TGT to pacs.002 TGT transformation"
+type: MX
+sourceFormat: "pacs.008.001.08"
+targetFormat: "pacs.002.001.10"
+
+generators:
+  - id: msgId
+    type: alphanumeric
+    length: 16
+
+variables:
+  - id: senderReference
+    xpath: "/DataPDU/Header/Message/SenderReference"
+    required: true
+
+transformations:
+  - xpath: "/DataPDU/Body/Document/FIToFIPmtStsRpt/TxInfAndSts/OrgnlGrpInf/OrgnlMsgId"
+    value: "${senderReference}"
+  - xpath: "/DataPDU/Header/Message/SenderReference"
+    value: "${msgId}"
