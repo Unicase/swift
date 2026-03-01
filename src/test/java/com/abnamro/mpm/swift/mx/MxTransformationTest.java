@@ -50,21 +50,25 @@ class MxTransformationTest {
         String minimalSpec = """
                 name: test
                 type: MX
-                mtVariables:
+                variables:
                   - id: senderReference
                     xpath: /DataPDU/Header/Message/SenderReference
                     required: true
                 transformations: []
                 """;
         MxTransformationSpec minSpec = loader.loadFromString(minimalSpec);
+        // Assert that variables are correctly parsed from the minimal spec
+        assertNotNull(minSpec.getVariables());
+        assertEquals(1, minSpec.getVariables().size());
+        assertEquals("senderReference", minSpec.getVariables().get(0).id());
+        assertEquals("/DataPDU/Header/Message/SenderReference", minSpec.getVariables().get(0).xpath());
+        assertTrue(minSpec.getVariables().get(0).required());
         String result = engine.transform(minSpec,
-                SOURCE_XML.toFile().getCanonicalPath().equals(SOURCE_XML.toString())
-                        ? java.nio.file.Files.readString(SOURCE_XML)
-                        : java.nio.file.Files.readString(SOURCE_XML),
+                java.nio.file.Files.readString(SOURCE_XML),
                 java.nio.file.Files.readString(TEMPLATE_XML));
-
-        // Template is unchanged but no exception means extraction worked;
-        // verify by running the full transformation and checking the value
+        // Template is unchanged but successful transform with the minimal spec
+        // confirms that variable extraction configuration is valid; verify by
+        // running the full transformation and checking the extracted value
         String fullResult = engine.transform(spec,
                 java.nio.file.Files.readString(SOURCE_XML),
                 java.nio.file.Files.readString(TEMPLATE_XML));
@@ -115,7 +119,7 @@ class MxTransformationTest {
         String specWithBadXpath = """
                 name: test
                 type: MX
-                mtVariables: []
+                variables: []
                 transformations:
                   - xpath: /DataPDU/NonExistent/Path
                     value: "something"

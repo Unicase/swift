@@ -1,6 +1,6 @@
 # SWIFT MT Message Transformation DSL
 
-![Build Status](https://github.com/YOUR_USERNAME/swift/actions/workflows/build.yml/badge.svg)
+![Build Status](https://github.com/Unicase/swift/actions/workflows/build.yml/badge.svg)
 [![License](https://img.shields.io/badge/license-Proprietary-blue.svg)](LICENSE)
 [![Java](https://img.shields.io/badge/java-17+-blue.svg)](https://www.oracle.com/java/)
 
@@ -9,10 +9,10 @@ A powerful, declarative DSL for transforming SWIFT MT messages using YAML config
 ## Download
 
 ### Latest Release
-Download the pre-built JAR from the [Releases](https://github.com/YOUR_USERNAME/swift/releases) page.
+Download the pre-built JAR from the [Releases](https://github.com/Unicase/swift/releases) page.
 
 ### Latest Build (main branch)
-Download artifacts from the [Actions](https://github.com/YOUR_USERNAME/swift/actions) tab.
+Download artifacts from the [Actions](https://github.com/Unicase/swift/actions) tab.
 
 ## Overview
 
@@ -305,7 +305,7 @@ The implementation includes comprehensive JUnit 5 tests:
 mvn test
 
 # Run specific test
-mvn test -Dtest=Mt541To545TransformationTest
+mvn test -Dtest=MtTransformationTest
 ```
 
 ### Test Coverage
@@ -408,6 +408,7 @@ src/
 │   │   ├── BaseYamlSpecLoader.java     # Generic YAML loader
 │   │   └── dsl/
 │   │       ├── BaseTransformationSpec.java  # Base spec class
+│   │       ├── FieldResolver.java
 │   │       ├── Generator.java
 │   │       ├── GeneratorType.java
 │   │       └── TransformationType.java
@@ -415,6 +416,7 @@ src/
 │   │   ├── Main.java                   # CLI entry point
 │   │   ├── MtTransformationEngine.java # Main engine
 │   │   ├── MtSpecLoader.java
+│   │   └── SwiftConstants.java
 │   │   ├── dsl/
 │   │   │   ├── MtTransformationSpec.java
 │   │   │   ├── MtTransformation.java
@@ -429,9 +431,7 @@ src/
 │   │       ├── BlockInsertService.java
 │   │       ├── GeneratorService.java
 │   │       ├── VariableExtractor.java
-│   │       ├── FieldResolver.java
-│   │       ├── MessageCopier.java
-│   │       └── SwiftConstants.java
+│   │       └── MessageCopier.java
 │   └── mx/
 │       ├── MxTransformationEngine.java
 │       ├── MxSpecLoader.java
