@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<DataPDU xmlns="urn:swift:saa:xsd:saa.2.0">
+	<Revision>2.0.10</Revision>
+	<Header>
+		<Message>
+			<SenderReference>NP3322868920000</SenderReference>
+			<MessageIdentifier>pacs.008.001.08</MessageIdentifier>
+			<Format>MX</Format>
+			<SubFormat>Input</SubFormat>
+			<Sender>
+				<DN>ou=xxx,o=abnanl2a,o=swift</DN>
+				<FullName>
+					<X1>ABNANL2AXXX</X1>
+				</FullName>
+			</Sender>
+			<Receiver>
+				<DN>cn=rtgs,o=trgtxepm,o=swift</DN>
+				<FullName>
+					<X1>TRGTXEPMXXX</X1>
+				</FullName>
+			</Receiver>
+			<InterfaceInfo>
+				<UserReference>NP3322868920000</UserReference>
+			</InterfaceInfo>
+			<NetworkInfo>
+				<Service>esmig.t2.iast</Service>
+				<SWIFTNetNetworkInfo>
+					<RequestType>pacs.008.001.08</RequestType>
+				</SWIFTNetNetworkInfo>
+			</NetworkInfo>
+		</Message>
+	</Header>
+	<Body>
+		<AppHdr xmlns="urn:iso:std:iso:20022:tech:xsd:head.001.001.01">
+			<Fr>
+				<FIId>
+					<FinInstnId>
+						<BICFI>ABNANL2AXXX</BICFI>
+						<ClrSysMmbId>
+							<MmbId>SNLABNANL2AXXXSAA</MmbId>
+						</ClrSysMmbId>
+					</FinInstnId>
+				</FIId>
+			</Fr>
+			<To>
+				<FIId>
+					<FinInstnId>
+						<BICFI>RABONL2UXXX</BICFI>
+					</FinInstnId>
+				</FIId>
+			</To>
+			<BizMsgIdr>NP3322868920000</BizMsgIdr>
+			<MsgDefIdr>pacs.008.001.08</MsgDefIdr>
+			<CreDt>2025-12-01T23:00:16Z</CreDt>
+		</AppHdr>
+		<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pacs.008.001.08">
+			<FIToFICstmrCdtTrf>
+				<GrpHdr>
+					<MsgId>NONREF</MsgId>
+					<CreDtTm>2025-12-02T00:00:16+01:00</CreDtTm>
+					<NbOfTxs>1</NbOfTxs>
+					<SttlmInf>
+						<SttlmMtd>CLRG</SttlmMtd>
+						<ClrSys>
+							<Cd>TGT</Cd>
+						</ClrSys>
+					</SttlmInf>
+				</GrpHdr>
+				<CdtTrfTxInf>
+					<PmtId>
+						<InstrId>NP51605512</InstrId>
+						<EndToEndId>NP51605512</EndToEndId>
+						<UETR>11b1a3ba-768d-40ae-b6e4-1a4b83d4dcc3</UETR>
+					</PmtId>
+					<PmtTpInf>
+						<CtgyPurp>
+							<Cd>CORT</Cd>
+						</CtgyPurp>
+					</PmtTpInf>
+					<IntrBkSttlmAmt Ccy="EUR">427789.92</IntrBkSttlmAmt>
+					<IntrBkSttlmDt>2025-12-02</IntrBkSttlmDt>
+					<SttlmPrty>HIGH</SttlmPrty>
+					<InstdAmt Ccy="EUR">427789.92</InstdAmt>
+					<ChrgBr>DEBT</ChrgBr>
+					<InstgAgt>
+						<FinInstnId>
+							<BICFI>ABNANL2AXXX</BICFI>
+						</FinInstnId>
+					</InstgAgt>
+					<InstdAgt>
+						<FinInstnId>
+							<BICFI>RABONL2UXXX</BICFI>
+						</FinInstnId>
+					</InstdAgt>
+					<Dbtr>
+						<Nm>ABN AMRO BANK N.V.</Nm>
+						<PstlAdr>
+							<StrtNm>GUSTAV MAHLERLAAN 10</StrtNm>
+							<TwnNm>AMSTERDAM</TwnNm>
+							<Ctry>NL</Ctry>
+						</PstlAdr>
+						<Id>
+							<OrgId>
+								<AnyBIC>ABNANL2AXXX</AnyBIC>
+							</OrgId>
+						</Id>
+					</Dbtr>
+					<DbtrAcct>
+						<Id>
+							<Othr>
+								<Id>0115617981</Id>
+							</Othr>
+						</Id>
+					</DbtrAcct>
+					<DbtrAgt>
+						<FinInstnId>
+							<BICFI>ABNANL2AXXX</BICFI>
+						</FinInstnId>
+					</DbtrAgt>
+					<CdtrAgt>
+						<FinInstnId>
+							<BICFI>RABONL2UXXX</BICFI>
+						</FinInstnId>
+					</CdtrAgt>
+					<Cdtr>
+						<Nm>ALLSEAS GROUP S.A.</Nm>
+						<PstlAdr>
+							<StrtNm>ROUTE DE PRA DE PLAN 18</StrtNm>
+							<TwnNm>CHATEL SAINT DENIS</TwnNm>
+							<Ctry>CH</Ctry>
+						</PstlAdr>
+					</Cdtr>
+					<CdtrAcct>
+						<Id>
+							<IBAN>NL31RABO0184118689</IBAN>
+						</Id>
+					</CdtrAcct>
+					<RmtInf>
+						<Ustrd>-NP51605512</Ustrd>
+					</RmtInf>
+				</CdtTrfTxInf>
+			</FIToFICstmrCdtTrf>
+		</Document>
+	</Body>
+	<LAU>
+		<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+			<ds:SignedInfo>
+				<ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+				<ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#hmac-sha256"/>
+				<ds:Reference URI="">
+					<ds:Transforms>
+						<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+						<ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+					</ds:Transforms>
+					<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+					<ds:DigestValue>1SuY3OwM09kyqR8o04f0enp5c4E8cW+tsmExnICkexc=</ds:DigestValue>
+				</ds:Reference>
+			</ds:SignedInfo>
+			<ds:SignatureValue>YzatTfEuoliIZqc5HEqQ0R44MhiOXTWvxaqDJKaPR1c=</ds:SignatureValue>
+		</ds:Signature>
+	</LAU>
+</DataPDU>

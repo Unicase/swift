@@ -1,5 +1,6 @@
 package com.abnamro.mpm.swift.mt.helpers;
 
+import com.abnamro.mpm.swift.common.helpers.FieldResolver;
 import com.abnamro.mpm.swift.mt.dsl.*;
 import com.prowidesoftware.swift.model.*;
 import com.prowidesoftware.swift.model.field.Field;
@@ -22,38 +23,38 @@ public class BlockSetterService {
     /**
      * Execute SET action for the appropriate block.
      */
-    public void executeSet(Transformation transformation, SwiftMessage message, Map<String, String> context) {
-        switch (transformation.block()) {
+    public void executeSet(MtTransformation mtTransformation, SwiftMessage message, Map<String, String> context) {
+        switch (mtTransformation.block()) {
             case BLOCK_1:
-                setBlock1(transformation, message.getBlock1(), context);
+                setBlock1(mtTransformation, message.getBlock1(), context);
                 break;
             case BLOCK_2:
-                setBlock2(transformation, message.getBlock2(), context);
+                setBlock2(mtTransformation, message.getBlock2(), context);
                 break;
             case BLOCK_3:
-                setBlock3(transformation, message.getBlock3(), context);
+                setBlock3(mtTransformation, message.getBlock3(), context);
                 break;
             case BLOCK_4:
-                setBlock4(transformation, message.getBlock4(), context);
+                setBlock4(mtTransformation, message.getBlock4(), context);
                 break;
             case BLOCK_5:
-                setBlock5(transformation, message, context);
+                setBlock5(mtTransformation, message, context);
                 break;
             case BLOCK_S:
-                setSystemBlock(transformation, message, context);
+                setSystemBlock(mtTransformation, message, context);
                 break;
             default:
-                throw new IllegalArgumentException("Unknown block: " + transformation.block());
+                throw new IllegalArgumentException("Unknown block: " + mtTransformation.block());
         }
     }
 
     /**
      * Set fields in Block 1 (Basic Header).
      */
-    private void setBlock1(Transformation transformation, SwiftBlock1 block1, Map<String, String> context) {
+    private void setBlock1(MtTransformation mtTransformation, SwiftBlock1 block1, Map<String, String> context) {
         if (block1 == null) return;
 
-        for (FieldConfig field : transformation.fields()) {
+        for (FieldConfig field : mtTransformation.fields()) {
             String value = fieldResolver.resolveValue(field, context);
             String fieldName = field.field();
 
@@ -74,10 +75,10 @@ public class BlockSetterService {
     /**
      * Set fields in Block 2 (Application Header).
      */
-    private void setBlock2(Transformation transformation, SwiftBlock2 block2, Map<String, String> context) {
+    private void setBlock2(MtTransformation mtTransformation, SwiftBlock2 block2, Map<String, String> context) {
         if (block2 == null) return;
 
-        for (FieldConfig field : transformation.fields()) {
+        for (FieldConfig field : mtTransformation.fields()) {
             String value = fieldResolver.resolveValue(field, context);
             String fieldName = field.field();
 
@@ -121,10 +122,10 @@ public class BlockSetterService {
     /**
      * Set fields in Block 3 (User Header).
      */
-    private void setBlock3(Transformation transformation, SwiftBlock3 block3, Map<String, String> context) {
+    private void setBlock3(MtTransformation mtTransformation, SwiftBlock3 block3, Map<String, String> context) {
         if (block3 == null) return;
 
-        for (FieldConfig field : transformation.fields()) {
+        for (FieldConfig field : mtTransformation.fields()) {
             String value = fieldResolver.resolveValue(field, context);
             String tagName = field.field();
 
@@ -142,12 +143,12 @@ public class BlockSetterService {
     /**
      * Set fields in Block 4 (Text Block / Message Body).
      */
-    private void setBlock4(Transformation transformation, SwiftBlock4 block4, Map<String, String> context) {
+    private void setBlock4(MtTransformation mtTransformation, SwiftBlock4 block4, Map<String, String> context) {
         if (block4 == null) return;
 
-        String targetSequence = transformation.sequence();
+        String targetSequence = mtTransformation.sequence();
 
-        for (FieldConfig fieldConfig : transformation.fields()) {
+        for (FieldConfig fieldConfig : mtTransformation.fields()) {
             String fieldSpec = fieldConfig.field();
             String value = fieldResolver.resolveValue(fieldConfig, context);
 
@@ -205,7 +206,7 @@ public class BlockSetterService {
     /**
      * Set fields in Block 5 (Trailer).
      */
-    private void setBlock5(Transformation transformation, SwiftMessage message, Map<String, String> context) {
+    private void setBlock5(MtTransformation mtTransformation, SwiftMessage message, Map<String, String> context) {
         // Create Block 5 if it doesn't exist
         SwiftBlock5 block5 = message.getBlock5();
         if (block5 == null) {
@@ -213,7 +214,7 @@ public class BlockSetterService {
             message.setBlock5(block5);
         }
 
-        for (FieldConfig field : transformation.fields()) {
+        for (FieldConfig field : mtTransformation.fields()) {
             String value = fieldResolver.resolveValue(field, context);
             String tagName = field.field();
 
@@ -229,7 +230,7 @@ public class BlockSetterService {
     /**
      * Set fields in System Block (S block).
      */
-    private void setSystemBlock(Transformation transformation, SwiftMessage message, Map<String, String> context) {
+    private void setSystemBlock(MtTransformation mtTransformation, SwiftMessage message, Map<String, String> context) {
         // System block handling - create user block if needed
         SwiftBlockUser systemBlock = message.getUserBlock("S");
         if (systemBlock == null) {
@@ -237,7 +238,7 @@ public class BlockSetterService {
             message.addUserBlock(systemBlock);
         }
 
-        for (FieldConfig field : transformation.fields()) {
+        for (FieldConfig field : mtTransformation.fields()) {
             String value = fieldResolver.resolveValue(field, context);
             String tagName = field.field();
 

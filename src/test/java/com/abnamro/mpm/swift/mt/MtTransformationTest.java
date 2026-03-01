@@ -1,6 +1,6 @@
 package com.abnamro.mpm.swift.mt;
 
-import com.abnamro.mpm.swift.mt.dsl.TransformationSpec;
+import com.abnamro.mpm.swift.mt.dsl.MtTransformationSpec;
 import com.prowidesoftware.swift.model.SwiftBlock4;
 import com.prowidesoftware.swift.model.SwiftMessage;
 import com.prowidesoftware.swift.model.Tag;
@@ -18,18 +18,18 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Unit test for MT541 to MT545 transformation using the DSL.
  */
-class Mt541To545TransformationTest {
+class MtTransformationTest {
 
     private MtTransformationEngine engine;
-    private TransformationSpecLoader loader;
-    private TransformationSpec spec;
+    private MtSpecLoader loader;
+    private MtTransformationSpec spec;
     private SwiftMessage sourceMessage;
 
     @BeforeEach
     void setUp() throws IOException {
         // Initialize the transformation engine
         engine = new MtTransformationEngine();
-        loader = new TransformationSpecLoader();
+        loader = new MtSpecLoader();
 
         // Load the transformation specification
         spec = loader.loadFromResource("mt/541-545.yaml");
@@ -43,10 +43,10 @@ class Mt541To545TransformationTest {
 
     @Test
     void testTransformationSpecLoaded() {
-        assertEquals("MT541 to MT545 transformation", spec.name());
-        assertEquals("MT541", spec.sourceFormat());
-        assertEquals("MT545", spec.targetFormat());
-        assertEquals("1.0", spec.version());
+        assertEquals("MT541 to MT545 transformation", spec.getName());
+        assertEquals("MT541", spec.getSourceFormat());
+        assertEquals("MT545", spec.getTargetFormat());
+        assertEquals("1.0", spec.getVersion());
     }
 
     @Test
@@ -292,9 +292,9 @@ class Mt541To545TransformationTest {
         System.out.println("\n=== Transformation Details ===");
         System.out.println("Source type: MT" + sourceMessage.getType());
         System.out.println("Target type: MT" + targetMessage.getType());
-        System.out.println("Generators used: " + spec.generators().size());
-        System.out.println("Variables extracted: " + spec.variables().size());
-        System.out.println("Transformations applied: " + spec.transformations().size());
+        System.out.println("Generators used: " + spec.getGenerators().size());
+        System.out.println("Variables extracted: " + spec.getVariables().size());
+        System.out.println("Transformations applied: " + spec.getTransformations().size());
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.abnamro.mpm.swift.mt;
 
+import com.abnamro.mpm.swift.common.helpers.FieldResolver;
+import com.abnamro.mpm.swift.common.helpers.GeneratorService;
 import com.abnamro.mpm.swift.mt.dsl.*;
 import com.abnamro.mpm.swift.mt.helpers.*;
 import com.prowidesoftware.swift.model.*;
@@ -19,7 +21,6 @@ import java.util.*;
  * - FieldResolver: Handles value resolution
  */
 public class MtTransformationEngine {
-
     private final GeneratorService generatorService;
     private final VariableExtractor variableExtractor;
     private final MessageCopier messageCopier;
@@ -44,16 +45,16 @@ public class MtTransformationEngine {
      * @param sourceMessage The source SWIFT message
      * @return The transformed target message
      */
-    public SwiftMessage transform(TransformationSpec spec, SwiftMessage sourceMessage) {
+    public SwiftMessage transform(MtTransformationSpec spec, SwiftMessage sourceMessage) {
         // Start with a copy of the source message
         SwiftMessage targetMessage = messageCopier.copyMessage(sourceMessage);
 
         // Generate all dynamic values
-        Map<String, String> generatedValues = generatorService.generateAll(spec.generators());
+        Map<String, String> generatedValues = generatorService.generateAll(spec.getGenerators());
 
         // Extract all variable values from source
         Map<String, String> variableValues = variableExtractor.extractAll(
-                spec.variables(),
+                spec.getVariables(),
                 sourceMessage.getBlock4()
         );
 
@@ -63,8 +64,8 @@ public class MtTransformationEngine {
         context.putAll(variableValues);
 
         // Execute each transformation in order
-        for (Transformation transformation : spec.transformations()) {
-            executeTransformation(transformation, targetMessage, context);
+        for (MtTransformation mtTransformation : spec.getTransformations()) {
+            executeTransformation(mtTransformation, targetMessage, context);
         }
 
         return targetMessage;
@@ -73,25 +74,25 @@ public class MtTransformationEngine {
     /**
      * Execute a single transformation action by delegating to appropriate service.
      */
-    private void executeTransformation(Transformation transformation, SwiftMessage message, Map<String, String> context) {
-        switch (transformation.action()) {
+    private void executeTransformation(MtTransformation mtTransformation, SwiftMessage message, Map<String, String> context) {
+        switch (mtTransformation.action()) {
             case SET:
-                blockSetterService.executeSet(transformation, message, context);
+                blockSetterService.executeSet(mtTransformation, message, context);
                 break;
             case DELETE:
-                blockDeleteService.executeDelete(transformation, message);
+                blockDeleteService.executeDelete(mtTransformation, message);
                 break;
             case DELETE_SEQUENCE:
-                blockDeleteService.executeDeleteSequence(transformation, message);
+                blockDeleteService.executeDeleteSequence(mtTransformation, message);
                 break;
             case INSERT_AFTER:
-                blockInsertService.executeInsertAfter(transformation, message, context);
+                blockInsertService.executeInsertAfter(mtTransformation, message, context);
                 break;
             case INSERT_BEFORE:
-                blockInsertService.executeInsertBefore(transformation, message, context);
+                blockInsertService.executeInsertBefore(mtTransformation, message, context);
                 break;
             default:
-                throw new IllegalArgumentException("Unknown action: " + transformation.action());
+                throw new IllegalArgumentException("Unknown action: " + mtTransformation.action());
         }
     }
 }

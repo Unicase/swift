@@ -1,6 +1,6 @@
 package com.abnamro.mpm.swift.mt.helpers;
 
-import com.abnamro.mpm.swift.mt.dsl.Variable;
+import com.abnamro.mpm.swift.mt.dsl.MtVariable;
 import com.abnamro.mpm.swift.mt.dsl.VariableSource;
 import com.prowidesoftware.swift.model.SwiftBlock4;
 import com.prowidesoftware.swift.model.field.Field;
@@ -20,24 +20,24 @@ public class VariableExtractor {
     /**
      * Extract all variable values from the source message.
      *
-     * @param variables List of variable definitions
+     * @param mtVariables List of variable definitions
      * @param block4    The source message block 4
      * @return Map of variable ID to extracted value
      */
-    public Map<String, String> extractAll(List<Variable> variables, SwiftBlock4 block4) {
+    public Map<String, String> extractAll(List<MtVariable> mtVariables, SwiftBlock4 block4) {
         Map<String, String> values = new HashMap<>();
 
-        for (Variable variable : variables) {
-            String value = extract(variable, block4);
+        for (MtVariable mtVariable : mtVariables) {
+            String value = extract(mtVariable, block4);
 
-            if (value == null && variable.required()) {
+            if (value == null && mtVariable.required()) {
                 throw new IllegalStateException(
-                    "Required variable '" + variable.id() + "' not found in source message"
+                    "Required variable '" + mtVariable.id() + "' not found in source message"
                 );
             }
 
             if (value != null) {
-                values.put(variable.id(), value);
+                values.put(mtVariable.id(), value);
             }
         }
 
@@ -47,8 +47,8 @@ public class VariableExtractor {
     /**
      * Extract a single variable value from the source message.
      */
-    private String extract(Variable variable, SwiftBlock4 block4) {
-        VariableSource source = variable.source();
+    private String extract(MtVariable mtVariable, SwiftBlock4 block4) {
+        VariableSource source = mtVariable.source();
 
         // Only block 4 extraction is supported for now
         if (!BLOCK_4.equals(source.block())) {
