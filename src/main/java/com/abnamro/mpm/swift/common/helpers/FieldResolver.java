@@ -1,4 +1,4 @@
-package com.abnamro.mpm.swift.mt.helpers;
+package com.abnamro.mpm.swift.common.helpers;
 
 import com.abnamro.mpm.swift.mt.dsl.FieldConfig;
 

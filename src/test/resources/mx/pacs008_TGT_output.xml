@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Saa:DataPDU xmlns:Saa="urn:swift:saa:xsd:saa.2.0"
+              xmlns:Sw="urn:swift:snl:ns.Sw"
+              xmlns:SwGbl="urn:swift:snl:ns.SwGbl"
+              xmlns:SwInt="urn:swift:snl:ns.SwInt"
+              xmlns:SwSec="urn:swift:snl:ns.SwSec">
+    <Saa:Revision>2.0.10</Saa:Revision>
+    <Saa:Header>
+        <Saa:Message>
+            <Saa:SenderReference>OTRGTXEPMXXX002$22082625579955</Saa:SenderReference>
+            <Saa:MessageIdentifier>pacs.002.001.10</Saa:MessageIdentifier>
+            <Saa:Format>MX</Saa:Format>
+            <Saa:SubFormat>Output</Saa:SubFormat>
+            <Saa:Sender>
+                <Saa:DN>cn=rtgs,o=trgtxepm,o=swift</Saa:DN>
+                <Saa:FullName>
+                    <Saa:X1>TRGTXEPMXXX</Saa:X1>
+                </Saa:FullName>
+            </Saa:Sender>
+            <Saa:Receiver>
+                <Saa:DN>ou=xxx,o=abnanl2a,o=swift</Saa:DN>
+                <Saa:FullName>
+                    <Saa:X1>ABNANL2AXXX</Saa:X1>
+                    <Saa:X2>xxx</Saa:X2>
+                </Saa:FullName>
+            </Saa:Receiver>
+            <Saa:InterfaceInfo>
+                <Saa:MessageCreator>SWIFTNetInterface</Saa:MessageCreator>
+                <Saa:MessageContext>Original</Saa:MessageContext>
+                <Saa:MessageNature>Financial</Saa:MessageNature>
+                <Saa:Sumid>1CF7855EFE79AE4C</Saa:Sumid>
+                <Saa:ServiceURI>mp/mx/_yBoT0N-8Eeu3WpMwTerpjQ</Saa:ServiceURI>
+                <Saa:MessageTypeURI>mp/mx/_yBoT0N-8Eeu3WpMwTerpjQ/_yBo69N-8Eeu3WpMwTerpjQ</Saa:MessageTypeURI>
+                <Saa:MessageProperties>
+                    <Saa:MessageProperty>
+                        <Saa:MessagePropertyName>DIALSumid</Saa:MessagePropertyName>
+                        <Saa:MessagePropertyValue>1CF7855EFE79AE4C</Saa:MessagePropertyValue>
+                    </Saa:MessageProperty>
+                    <Saa:MessageProperty>
+                        <Saa:MessagePropertyName>ESMIG_MESSAGE_ID</Saa:MessagePropertyName>
+                        <Saa:MessagePropertyValue>tgw201.6042f25c-a69c-41e2-82e0-6a6e1c16bc7c</Saa:MessagePropertyValue>
+                    </Saa:MessageProperty>
+                    <Saa:MessageProperty>
+                        <Saa:MessagePropertyName>GFSMXMessageId</Saa:MessagePropertyName>
+                        <Saa:MessagePropertyValue>1CF7855EFE79AE4C_4333640</Saa:MessagePropertyValue>
+                    </Saa:MessageProperty>
+                    <Saa:MessageProperty>
+                        <Saa:MessagePropertyName>OrgnlMsgId_v02</Saa:MessagePropertyName>
+                        <Saa:MessagePropertyValue>NP25313368260924</Saa:MessagePropertyValue>
+                    </Saa:MessageProperty>
+                    <Saa:MessageProperty>
+                        <Saa:MessagePropertyName>T2_COMMUNICATION_ID</Saa:MessagePropertyName>
+                        <Saa:MessagePropertyValue>swi02148-2022-08-26T07:43:25.07765.211379Z</Saa:MessagePropertyValue>
+                    </Saa:MessageProperty>
+                </Saa:MessageProperties>
+            </Saa:InterfaceInfo>
+            <Saa:NetworkInfo>
+                <Saa:Priority>Normal</Saa:Priority>
+                <Saa:IsPossibleDuplicate>false</Saa:IsPossibleDuplicate>
+                <Saa:Service>esmig.t2.iast!pu</Saa:Service>
+                <Saa:Network>SWIFTNet</Saa:Network>
+                <Saa:SessionNr>005185</Saa:SessionNr>
+                <Saa:SeqNr>000121541</Saa:SeqNr>
+                <Saa:SWIFTNetNetworkInfo>
+                    <Saa:RequestType>pacs.002.001.10</Saa:RequestType>
+                    <Saa:SWIFTRef>swi02148-2022-08-26T07:43:25.07765.211379Z</Saa:SWIFTRef>
+                    <Saa:SNLRef>snp02144-2022-08-26T07:43:25.07765.211378Z</Saa:SNLRef>
+                    <Saa:SnFQueueName>abnanl2a_t2utestmsg!p</Saa:SnFQueueName>
+                    <Saa:SnFInputTime>0301:2022-08-26T07:43:25</Saa:SnFInputTime>
+                    <Saa:SnFDeliveryTime>2022-08-26T07:43:30Z</Saa:SnFDeliveryTime>
+                    <Saa:PayloadAttributes>
+                        <Saa:PayloadAttribute>
+                            <Saa:Name>ESMIGMessageId</Saa:Name>
+                            <Saa:Value>tgw201.6042f25c-a69c-41e2-82e0-6a6e1c16bc7c</Saa:Value>
+                        </Saa:PayloadAttribute>
+                        <Saa:PayloadAttribute>
+                            <Saa:Name>SwCompression</Saa:Name>
+                            <Saa:Value>None</Saa:Value>
+                        </Saa:PayloadAttribute>
+                    </Saa:PayloadAttributes>
+                </Saa:SWIFTNetNetworkInfo>
+            </Saa:NetworkInfo>
+            <Saa:ExpiryDateTime>20220916074330</Saa:ExpiryDateTime>
+        </Saa:Message>
+    </Saa:Header>
+    <Saa:Body>
+        <AppHdr xmlns="urn:iso:std:iso:20022:tech:xsd:head.001.001.01">
+            <Fr>
+                <FIId>
+                    <FinInstnId>
+                        <BICFI>TRGTXEPMRTG</BICFI>
+                    </FinInstnId>
+                </FIId>
+            </Fr>
+            <To>
+                <FIId>
+                    <FinInstnId>
+                        <BICFI>ABNANL2AXXX</BICFI>
+                    </FinInstnId>
+                </FIId>
+            </To>
+            <BizMsgIdr>6437717</BizMsgIdr>
+            <MsgDefIdr>pacs.002.001.10</MsgDefIdr>
+            <CreDt>2022-08-26T07:43:25.523Z</CreDt>
+            <Sgntr>
+                <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" Id="_cab3d09b-e522-4035-9912-591cbe48ca7f">
+                    <ds:SignedInfo>
+                        <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+                        <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+                        <ds:Reference URI="#_e3d52b9d-e3a1-4295-9ebe-622de7a90019">
+                            <ds:Transforms>
+                                <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+                            </ds:Transforms>
+                            <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                            <ds:DigestValue>Dsy/+uBJYE6uRafhGYV8NmtnJsxAfJo2v59TcqEa09Y=</ds:DigestValue>
+                        </ds:Reference>
+                        <ds:Reference URI="">
+                            <ds:Transforms>
+                                <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+                                <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+                            </ds:Transforms>
+                            <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                            <ds:DigestValue>Fk/a63VHXad/g4WHocpVJa6JsDnkrj/ZsfcpGMIrv1Q=</ds:DigestValue>
+                        </ds:Reference>
+                        <ds:Reference>
+                            <ds:Transforms>
+                                <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+                            </ds:Transforms>
+                            <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                            <ds:DigestValue>/kQ6fkkcIWXCnNm32s01TGXFWTpdm6nyyjzGly8KrxQ=</ds:DigestValue>
+                        </ds:Reference>
+                    </ds:SignedInfo>
+                    <ds:SignatureValue>hVEZ1at/MO6zbBoKrF7ahRbY2yFPaGAQ1UbdV2dnyA5zX7buLXvCqDupYXIT5U8eAYnFvtpg2Pu/rL3ud4NScz9md0QtjGCaFusjmT/yU+zzeUkWg8CBMFmCDxKGKfO9pxTdpqrdzcVOMcC2M5jGPptwLLUwaPbVzBcV6O0bj2Zt0ZtLjpJHVDS05kspoQ2F1D34UpQCt15BZAKqEkdobkw9wb2ztze6BqJFmkP4qa26hFAjJtCoIr7Uy2eSJx9yIgDB96Opzw8+zaty2nxX7s3OP8n7hP7L/3mRlrn2qj+oWJETGxvJne90oa2tucekjVOoy6dm5aRHnbzPrVt7Dw==</ds:SignatureValue>
+                    <ds:KeyInfo Id="_e3d52b9d-e3a1-4295-9ebe-622de7a90019">
+                        <ds:X509Data>
+                            <ds:X509Certificate>MIIExTCCAq2gAwIBAgIEYPzaKzANBgkqhkiG9w0BAQsFADAQMQ4wDAYDVQQKEwVTV0lGVDAeFw0yMTA4MzAxNDM1MjlaFw0yMzA4MzAxNTA1MjlaMEYxDjAMBgNVBAoTBXN3aWZ0MREwDwYDVQQKEwh0cmd0eGVwbTEOMAwGA1UECxMFdXRlc3QxETAPBgNVBAMTCHN3aWZ0LXQyMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAitVMF+IYKja5tB3pJW9MpFhkJibmchd/5u6miMIkdSNrzCXiWtDHuNGjbkU9C68X1qEWqcrU5RvcJNDCQsokTleMeoAUwv/aFVBXXoGZOJ57mz8I3szPdWgE7Fvtf+pcriscDGCPbsORvESWsgCVwxTs21LOsFbOTolx6IAZb8pEBAlMWYUhUaTCLh0s0NDn45X2HTAkwlTrLBljYQTNrpV1axkSwV4qu67t0dmNXHLFqJ4U3auuG0BWLPQv5MJaRFLZIddIGaereqehDf1tByk75dmltN6F9VBgWvdTpFoXN2jIZA1qdjpfDtTUhaDO6BW7e93Yh5EXzIc8Y2S0bwIDAQABo4HwMIHtMAsGA1UdDwQEAwIE8DAUBgNVHSAEDTALMAkGBysVBgMKZAIwNQYDVR0fBC4wLDAqoCigJqQkMCIxDjAMBgNVBAoTBVNXSUZUMRAwDgYDVQQDEwdDUkw0NDAwMCsGA1UdEAQkMCKADzIwMjEwODMwMTQzNTI5WoEPMjAyMzA4MzAxNTA1MjlaMB8GA1UdIwQYMBaAFFKjAShg2ZUnQeIQngmfq4PQ8ZZCMB0GA1UdDgQWBBSfDx0nsm2sj56hopBKml1yQZjl5DAJBgNVHRMEAjAAMBkGCSqGSIb2fQdBAAQMMAobBFY4LjIDAgOoMA0GCSqGSIb3DQEBCwUAA4ICAQDFQURrTaWtHrTTSkZT7qWIToHBGPcJiD7AbxSg/7ZvTBTjfAALEaONBGD28S+wVNP6PKYHFe/JI05vxlEJnz1VYn4mtNdvg+GJ9jdNTs+o3+z0UtY7dpjoNBXh+UNknM6vFsJuOrqy0xXb9XVzqfIv/mtcQ7y8v5F10T5DINcXAqw7valKSW5VCDSxqDBhgMuR6dVpFbz31dagHGdXkwnp0utcb4mgezivm1Ml8DEw+4QQQoC35ave3P5S8eMbyEXTmEAn+YPYLiqHfggRBfwy02anTh7WK4tegMhgbIy142yR4ozSVHyi6otgLtGVflOJVmWPFeotRQ+BLAFXQONP95/5hyQJyaTpLUHbdrtAWNjUNctaOQldLe80hBTbzVdTLALlyq9dV7AovmQukj6Fam95gnyUWMVFhE2Wa+6FzZvwxOZ5HRh4qO10d7a7XwyIn9xBaPGYQ83PTOYhMZNBJPjndsANu4xq9LbRjlpf+760/IZivPEqn9PCfk9o8pebfbAHlxUzBdAfBz3oV8mH6dfVEjV0ZMjx9hMSIWV/EiW2t7WJyyatN9qytITkwWhydDjDo339Txsjxget3VGZJ4yOHYHyin3JhW1neysnsQoFG1le+ahSrLsI8MbWbMpsiwYSvsrGgQqSNQ51YLYhhbbQZUdnze76x8BjlJ9Q6Q==</ds:X509Certificate>
+                        </ds:X509Data>
+                    </ds:KeyInfo>
+                </ds:Signature>
+            </Sgntr>
+        </AppHdr>
+        <Document xmlns="urn:iso:std:iso:20022:tech:xsd:pacs.002.001.10">
+            <FIToFIPmtStsRpt>
+                <GrpHdr>
+                    <MsgId>NONREF</MsgId>
+                    <CreDtTm>2022-08-26T07:43:25.523+00:00</CreDtTm>
+                </GrpHdr>
+                <TxInfAndSts>
+                    <OrgnlGrpInf>
+                        <OrgnlMsgId></OrgnlMsgId>
+                        <OrgnlMsgNmId>pacs.008.001.08</OrgnlMsgNmId>
+                    </OrgnlGrpInf>
+                    <OrgnlInstrId>NP39337113</OrgnlInstrId>
+                    <OrgnlEndToEndId>NP39337113</OrgnlEndToEndId>
+                    <OrgnlUETR>02c17133-2d6e-4561-a836-67039e98b470</OrgnlUETR>
+                    <TxSts>ACSC</TxSts>
+                    <FctvIntrBkSttlmDt>
+                        <DtTm>2022-08-26T07:43:25.394+00:00</DtTm>
+                    </FctvIntrBkSttlmDt>
+                    <ClrSysRef>1323564</ClrSysRef>
+                </TxInfAndSts>
+            </FIToFIPmtStsRpt>
+        </Document>
+    </Saa:Body>
+</Saa:DataPDU>
+

@@ -1,4 +1,6 @@
-package com.abnamro.mpm.swift.mt.dsl;
+package com.abnamro.mpm.swift.common.dsl;
+
+import com.abnamro.mpm.swift.mt.dsl.GeneratorType;
 
 /**
  * Generator configuration for creating dynamic values.

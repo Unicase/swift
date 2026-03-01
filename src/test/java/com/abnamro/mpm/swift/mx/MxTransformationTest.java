@@ -32,16 +32,16 @@ class MxTransformationTest {
     @Test
     void testSpecLoading() {
         assertNotNull(spec);
-        assertEquals("pacs.008 TGT to pacs.002 TGT transformation", spec.name());
-        assertEquals("pacs.008.001.08", spec.sourceFormat());
-        assertEquals("pacs.002.001.10", spec.targetFormat());
-        assertEquals(1, spec.generators().size());
-        assertEquals("msgId", spec.generators().get(0).id());
-        assertEquals(1, spec.variables().size());
-        assertEquals("senderReference", spec.variables().get(0).id());
-        assertEquals("/DataPDU/Header/Message/SenderReference", spec.variables().get(0).xpath());
-        assertTrue(spec.variables().get(0).required());
-        assertEquals(2, spec.transformations().size());
+        assertEquals("pacs.008 TGT to pacs.002 TGT transformation", spec.getName());
+        assertEquals("pacs.008.001.08", spec.getSourceFormat());
+        assertEquals("pacs.002.001.10", spec.getTargetFormat());
+        assertEquals(1, spec.getGenerators().size());
+        assertEquals("msgId", spec.getGenerators().get(0).id());
+        assertEquals(1, spec.getVariables().size());
+        assertEquals("senderReference", spec.getVariables().get(0).id());
+        assertEquals("/DataPDU/Header/Message/SenderReference", spec.getVariables().get(0).xpath());
+        assertTrue(spec.getVariables().get(0).required());
+        assertEquals(2, spec.getTransformations().size());
     }
 
     @Test
@@ -50,7 +50,7 @@ class MxTransformationTest {
         String minimalSpec = """
                 name: test
                 type: MX
-                variables:
+                mtVariables:
                   - id: senderReference
                     xpath: /DataPDU/Header/Message/SenderReference
                     required: true
@@ -115,7 +115,7 @@ class MxTransformationTest {
         String specWithBadXpath = """
                 name: test
                 type: MX
-                variables: []
+                mtVariables: []
                 transformations:
                   - xpath: /DataPDU/NonExistent/Path
                     value: "something"

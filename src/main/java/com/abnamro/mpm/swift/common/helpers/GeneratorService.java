@@ -1,6 +1,6 @@
-package com.abnamro.mpm.swift.mt.helpers;
+package com.abnamro.mpm.swift.common.helpers;
 
-import com.abnamro.mpm.swift.mt.dsl.Generator;
+import com.abnamro.mpm.swift.common.dsl.Generator;
 
 import java.security.SecureRandom;
 import java.time.LocalDate;

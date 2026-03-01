@@ -7,6 +7,6 @@ package com.abnamro.mpm.swift.mt.dsl;
  * @param source   Source location in the message
  * @param required Whether this variable is required
  */
-public record Variable(String id, VariableSource source, boolean required) {
+public record MtVariable(String id, VariableSource source, boolean required) {
 }
 

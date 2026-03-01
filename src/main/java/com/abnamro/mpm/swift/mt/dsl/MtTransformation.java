@@ -20,7 +20,7 @@ import java.util.List;
  * @param fields    List of fields to transform
  * @param sequences List of sequences to insert
  */
-public record Transformation(
+public record MtTransformation(
         String block,
         String sequence,
         ActionType action,
@@ -31,7 +31,7 @@ public record Transformation(
     /**
      * Canonical constructor with defensive copying and null-safe initialization.
      */
-    public Transformation {
+    public MtTransformation {
         fields = fields != null ? new ArrayList<>(fields) : new ArrayList<>();
         sequences = sequences != null ? new ArrayList<>(sequences) : new ArrayList<>();
     }
@@ -39,7 +39,7 @@ public record Transformation(
     /**
      * Convenience constructor for Jackson deserialization with default empty lists.
      */
-    public Transformation(String block, String sequence, ActionType action, String field) {
+    public MtTransformation(String block, String sequence, ActionType action, String field) {
         this(block, sequence, action, field, new ArrayList<>(), new ArrayList<>());
     }
 }

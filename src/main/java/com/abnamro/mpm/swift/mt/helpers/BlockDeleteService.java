@@ -21,8 +21,8 @@ public class BlockDeleteService {
     /**
      * Execute DELETE action - remove fields.
      */
-    public void executeDelete(Transformation transformation, SwiftMessage message) {
-        String block = transformation.block();
+    public void executeDelete(MtTransformation mtTransformation, SwiftMessage message) {
+        String block = mtTransformation.block();
 
         if (!BLOCK_4.equals(block)) {
             throw new UnsupportedOperationException("Delete action only supported for block 4");
@@ -31,9 +31,9 @@ public class BlockDeleteService {
         SwiftBlock4 block4 = message.getBlock4();
         if (block4 == null) return;
 
-        String targetSequence = transformation.sequence();
+        String targetSequence = mtTransformation.sequence();
 
-        for (FieldConfig fieldConfig : transformation.fields()) {
+        for (FieldConfig fieldConfig : mtTransformation.fields()) {
             String fieldSpec = fieldConfig.field();
 
             // Parse field specification
@@ -86,8 +86,8 @@ public class BlockDeleteService {
     /**
      * Execute DELETE SEQUENCE action - remove entire sequences.
      */
-    public void executeDeleteSequence(Transformation transformation, SwiftMessage message) {
-        String block = transformation.block();
+    public void executeDeleteSequence(MtTransformation mtTransformation, SwiftMessage message) {
+        String block = mtTransformation.block();
 
         if (!BLOCK_4.equals(block)) {
             throw new UnsupportedOperationException("DeleteSequence action only supported for block 4");
@@ -96,9 +96,9 @@ public class BlockDeleteService {
         SwiftBlock4 block4 = message.getBlock4();
         if (block4 == null) return;
 
-        String parentSequence = transformation.sequence();
+        String parentSequence = mtTransformation.sequence();
 
-        for (SequenceConfig seqConfig : transformation.sequences()) {
+        for (SequenceConfig seqConfig : mtTransformation.sequences()) {
             String sequenceName = seqConfig.sequence();
 
             if (parentSequence != null) {

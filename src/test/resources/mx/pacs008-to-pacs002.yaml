@@ -1,4 +1,5 @@
 name: "pacs.008 TGT to pacs.002 TGT transformation"
+version: "1.0"
 type: MX
 sourceFormat: "pacs.008.001.08"
 targetFormat: "pacs.002.001.10"

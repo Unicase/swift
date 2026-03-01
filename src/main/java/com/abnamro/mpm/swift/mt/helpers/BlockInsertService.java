@@ -1,5 +1,6 @@
 package com.abnamro.mpm.swift.mt.helpers;
 
+import com.abnamro.mpm.swift.common.helpers.FieldResolver;
 import com.abnamro.mpm.swift.mt.dsl.*;
 import com.prowidesoftware.swift.model.*;
 import com.prowidesoftware.swift.model.field.Field;
@@ -24,8 +25,8 @@ public class BlockInsertService {
     /**
      * Execute INSERT AFTER action - insert sequences after a field.
      */
-    public void executeInsertAfter(Transformation transformation, SwiftMessage message, Map<String, String> context) {
-        String block = transformation.block();
+    public void executeInsertAfter(MtTransformation mtTransformation, SwiftMessage message, Map<String, String> context) {
+        String block = mtTransformation.block();
 
         if (!BLOCK_4.equals(block)) {
             throw new UnsupportedOperationException("InsertAfter action only supported for block 4");
@@ -34,8 +35,8 @@ public class BlockInsertService {
         SwiftBlock4 block4 = message.getBlock4();
         if (block4 == null) return;
 
-        String afterField = transformation.field();
-        String targetSequence = transformation.sequence();
+        String afterField = mtTransformation.field();
+        String targetSequence = mtTransformation.sequence();
         int insertPosition = findFieldPosition(block4, afterField, targetSequence);
 
         if (insertPosition < 0) {
@@ -47,7 +48,7 @@ public class BlockInsertService {
         insertPosition++;
 
         // Build tags to insert
-        List<Tag> tagsToInsert = buildTagsToInsert(transformation, context);
+        List<Tag> tagsToInsert = buildTagsToInsert(mtTransformation, context);
 
         // Insert all tags at the calculated position
         block4.getTags().addAll(insertPosition, tagsToInsert);
@@ -56,8 +57,8 @@ public class BlockInsertService {
     /**
      * Execute INSERT BEFORE action - insert sequences before a field.
      */
-    public void executeInsertBefore(Transformation transformation, SwiftMessage message, Map<String, String> context) {
-        String block = transformation.block();
+    public void executeInsertBefore(MtTransformation mtTransformation, SwiftMessage message, Map<String, String> context) {
+        String block = mtTransformation.block();
 
         if (!BLOCK_4.equals(block)) {
             throw new UnsupportedOperationException("InsertBefore action only supported for block 4");
@@ -66,8 +67,8 @@ public class BlockInsertService {
         SwiftBlock4 block4 = message.getBlock4();
         if (block4 == null) return;
 
-        String beforeField = transformation.field();
-        String targetSequence = transformation.sequence();
+        String beforeField = mtTransformation.field();
+        String targetSequence = mtTransformation.sequence();
         int insertPosition = findFieldPosition(block4, beforeField, targetSequence);
 
         if (insertPosition < 0) {
@@ -76,7 +77,7 @@ public class BlockInsertService {
         }
 
         // Build tags to insert
-        List<Tag> tagsToInsert = buildTagsToInsert(transformation, context);
+        List<Tag> tagsToInsert = buildTagsToInsert(mtTransformation, context);
 
         // Insert all tags at the calculated position
         block4.getTags().addAll(insertPosition, tagsToInsert);
@@ -85,11 +86,11 @@ public class BlockInsertService {
     /**
      * Build the list of tags to insert for sequences and/or fields.
      */
-    private List<Tag> buildTagsToInsert(Transformation transformation, Map<String, String> context) {
+    private List<Tag> buildTagsToInsert(MtTransformation mtTransformation, Map<String, String> context) {
         List<Tag> tagsToInsert = new ArrayList<>();
 
         // Insert sequences (with 16R/16S markers)
-        for (SequenceConfig seqConfig : transformation.sequences()) {
+        for (SequenceConfig seqConfig : mtTransformation.sequences()) {
             // Add sequence start marker
             tagsToInsert.add(new Tag(SEQUENCE_START_MARKER, seqConfig.sequence()));
 
@@ -103,7 +104,7 @@ public class BlockInsertService {
         }
 
         // Insert simple fields (not part of a sequence)
-        for (FieldConfig fieldConfig : transformation.fields()) {
+        for (FieldConfig fieldConfig : mtTransformation.fields()) {
             addFieldTag(tagsToInsert, fieldConfig, context);
         }
 

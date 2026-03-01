@@ -1,7 +1,7 @@
 package com.abnamro.mpm.swift.mx;
 
-import com.abnamro.mpm.swift.mt.helpers.FieldResolver;
-import com.abnamro.mpm.swift.mt.helpers.GeneratorService;
+import com.abnamro.mpm.swift.common.helpers.FieldResolver;
+import com.abnamro.mpm.swift.common.helpers.GeneratorService;
 import com.abnamro.mpm.swift.mx.dsl.MxTransformation;
 import com.abnamro.mpm.swift.mx.dsl.MxTransformationSpec;
 import com.abnamro.mpm.swift.mx.dsl.MxVariable;
@@ -75,7 +75,7 @@ public class MxTransformationEngine {
      */
     public String transform(MxTransformationSpec spec, String sourceXml, String templateXml) throws Exception {
         // Generate dynamic values
-        Map<String, String> generatedValues = generatorService.generateAll(spec.generators());
+        Map<String, String> generatedValues = generatorService.generateAll(spec.getGenerators());
         log.debug("Generated {} values", generatedValues.size());
 
         // Parse source XML (namespace-aware to preserve document fidelity)
@@ -95,7 +95,7 @@ public class MxTransformationEngine {
 
         // Apply transformations to template
         XPath xpathEval = XPathFactory.newInstance().newXPath();
-        for (MxTransformation transformation : spec.transformations()) {
+        for (MxTransformation transformation : spec.getTransformations()) {
             applyTransformation(transformation, templateDoc, context, xpathEval);
         }
 
@@ -107,7 +107,7 @@ public class MxTransformationEngine {
         Map<String, String> values = new HashMap<>();
         XPath xpathEval = XPathFactory.newInstance().newXPath();
 
-        for (MxVariable variable : spec.variables()) {
+        for (MxVariable variable : spec.getVariables()) {
             String agnosticXpath = toNamespaceAgnosticXPath(variable.xpath());
             Node node = (Node) xpathEval.evaluate(agnosticXpath, sourceDoc, XPathConstants.NODE);
 

@@ -1,6 +1,6 @@
 package com.abnamro.mpm.swift.mt;
 
-import com.abnamro.mpm.swift.mt.dsl.TransformationSpec;
+import com.abnamro.mpm.swift.mt.dsl.MtTransformationSpec;
 import com.abnamro.mpm.swift.mx.MxSpecLoader;
 import com.abnamro.mpm.swift.mx.MxTransformationEngine;
 import com.abnamro.mpm.swift.mx.dsl.MxTransformationSpec;
@@ -81,7 +81,7 @@ public class Main {
         log.info("Loading MX transformation specification from: {}", specFile);
         MxSpecLoader loader = new MxSpecLoader();
         MxTransformationSpec spec = loader.loadFromFile(Paths.get(specFile));
-        log.info("Loaded MX transformation: {}", spec.name());
+        log.info("Loaded MX transformation: {}", spec.getName());
 
         log.info("Executing MX transformation...");
         MxTransformationEngine engine = new MxTransformationEngine();
@@ -99,12 +99,12 @@ public class Main {
 
         System.err.println();
         System.err.println("=== MX Transformation Summary ===");
-        System.err.println("Specification: " + spec.name());
-        System.err.println("Source format: " + spec.sourceFormat());
-        System.err.println("Target format: " + spec.targetFormat());
-        System.err.println("Generators: " + spec.generators().size());
-        System.err.println("Variables: " + spec.variables().size());
-        System.err.println("Transformations: " + spec.transformations().size());
+        System.err.println("Specification: " + spec.getName());
+        System.err.println("Source format: " + spec.getSourceFormat());
+        System.err.println("Target format: " + spec.getTargetFormat());
+        System.err.println("Generators: " + spec.getGenerators().size());
+        System.err.println("Variables: " + spec.getVariables().size());
+        System.err.println("Transformations: " + spec.getTransformations().size());
     }
 
     private static void runMt(String[] args, String specFile) throws Exception {
@@ -118,9 +118,9 @@ public class Main {
         String outputFile = args.length == 3 ? args[2] : null;
 
         log.info("Loading transformation specification from: {}", specFile);
-        TransformationSpecLoader loader = new TransformationSpecLoader();
-        TransformationSpec spec = loader.loadFromFile(Paths.get(specFile));
-        log.info("Loaded transformation: {} ({})", spec.name(), spec.version());
+        MtSpecLoader loader = new MtSpecLoader();
+        MtTransformationSpec spec = loader.loadFromFile(Paths.get(specFile));
+        log.info("Loaded transformation: {} ({})", spec.getName(), spec.getVersion());
 
         log.info("Loading source message from: {}", sourceFile);
         String sourceContent = Files.readString(Paths.get(sourceFile));
@@ -152,12 +152,12 @@ public class Main {
 
         System.err.println();
         System.err.println("=== Transformation Summary ===");
-        System.err.println("Specification: " + spec.name());
-        System.err.println("Source format: " + spec.sourceFormat() + " (MT" + sourceMessage.getType() + ")");
-        System.err.println("Target format: " + spec.targetFormat() + " (MT" + targetMessage.getType() + ")");
-        System.err.println("Generators: " + spec.generators().size());
-        System.err.println("Variables: " + spec.variables().size());
-        System.err.println("Transformations: " + spec.transformations().size());
+        System.err.println("Specification: " + spec.getName());
+        System.err.println("Source format: " + spec.getSourceFormat() + " (MT" + sourceMessage.getType() + ")");
+        System.err.println("Target format: " + spec.getTargetFormat() + " (MT" + targetMessage.getType() + ")");
+        System.err.println("Generators: " + spec.getGenerators().size());
+        System.err.println("Variables: " + spec.getVariables().size());
+        System.err.println("Transformations: " + spec.getTransformations().size());
     }
 
     private static void printUsage() {
